@@ -1,6 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<Language> localizer
+@{
+    ViewData["Title"] = localizer["Privacy Policy"].Value;
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<p>@localizer["Use this page to detail your site's privacy policy."].Value</p>
