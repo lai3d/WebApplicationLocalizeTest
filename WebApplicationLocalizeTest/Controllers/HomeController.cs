@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WebApplicationLocalizeTest.Models;
 
@@ -32,6 +35,28 @@ namespace WebApplicationLocalizeTest.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult SelectLanguageEnglish()
+        {
+            Response.Cookies.Append(
+               CookieRequestCultureProvider.DefaultCookieName,
+               CookieRequestCultureProvider.MakeCookieValue(new RequestCulture("en-US")),
+               new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+           );
+
+            return LocalRedirect("~/Home/Index");
+        }
+
+        public IActionResult SelectLanguageChinese()
+        {
+            Response.Cookies.Append(
+               CookieRequestCultureProvider.DefaultCookieName,
+               CookieRequestCultureProvider.MakeCookieValue(new RequestCulture("zh-CN")),
+               new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+           );
+
+            return LocalRedirect("~/Home/Index");
         }
     }
 }
