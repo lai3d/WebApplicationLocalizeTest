@@ -16,7 +16,12 @@
 </div>
 
 <script src="~/lib/banana-i18n.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
 <script>
-    console.log('Test i18n in Index.html', banana.i18n('Category'))
+    var banana = new Banana();
+    banana.setLocale("zh");
+
+    fetch('/i18n/demo-' + banana.locale + '.json').then((response) => response.json()).then((messages) => {
+        banana.load(messages, banana.locale)
+        console.log('Test i18n in Index.html', banana.i18n('Category'))
+    })
 </script>
