@@ -14,3 +14,9 @@
         <input type="button" value="中文" onclick="location.href='@Url.Action("SelectLanguageChinese", "Home")'" />
      </p>
 </div>
+
+<script src="~/lib/banana-i18n.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script>
+    console.log('Test i18n in Index.html', banana.i18n('Category'))
+</script>
