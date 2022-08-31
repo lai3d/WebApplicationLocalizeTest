@@ -2,15 +2,34 @@
 @inject IStringLocalizer<Language> localizer
 @{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section HeadSection{
+    <script src="/scripts/test/testtable.js"></script>
+    <script type="text/javascript" language="JavaScript">
+        layui.use(['i18np'], function () {
+            var i18np = layui.i18np;
+
+            var language = localStorage.getItem('language');
+            i18np.load(language);
+
+            console.log('Message Index language:', language);
+            console.log('Message Index i18n:', i18np.prop('haha'));
+            console.log('Message Index i18n:', i18np.prop('not exist yet'));
+        });
+    </script>
 }
 
 <div class="text-center">
     <h1 class="display-4">@localizer["Welcome"]</h1>
     <p>@localizer["Learn about"] <a href="https://docs.microsoft.com/aspnet/core">@localizer["building Web apps with ASP.NET Core"]</a>.</p>
     <p>
-        <input type="button" value="English" onclick="location.href='@Url.Action("SelectLanguageEnglish", "Home")'" />
+        <input type="button" value="English" onclick="changeLanguage('en'); location.href='@Url.Action("SelectLanguageEnglish", "Home")'" />
     </p>
      <p>
-        <input type="button" value="中文" onclick="location.href='@Url.Action("SelectLanguageChinese", "Home")'" />
+        <input type="button" value="中文" onclick="changeLanguage('zh'); location.href='@Url.Action("SelectLanguageChinese", "Home")'" />
      </p>
+
+    <table id="MessageList" lay-filter="MessageList"></table>
 </div>
