@@ -25,10 +25,10 @@
     <h1 class="display-4">@localizer["Welcome"]</h1>
     <p>@localizer["Learn about"] <a href="https://docs.microsoft.com/aspnet/core">@localizer["building Web apps with ASP.NET Core"]</a>.</p>
     <p>
-        <input type="button" value="English" onclick="changeLanguage('en'); location.href='@Url.Action("SelectLanguageEnglish", "Home")'" />
+        <input type="button" value="English" onclick="changeLanguage('en'); location.href='@Url.Action("SelectLanguage", "Home", new { language = "en-US" })'" />
     </p>
      <p>
-        <input type="button" value="中文" onclick="changeLanguage('zh'); location.href='@Url.Action("SelectLanguageChinese", "Home")'" />
+            <input type="button" value="中文" onclick="changeLanguage('zh'); location.href='@Url.Action("SelectLanguage", "Home", new { language = "zh-CN" })'" />
      </p>
 
     <table id="MessageList" lay-filter="MessageList"></table>

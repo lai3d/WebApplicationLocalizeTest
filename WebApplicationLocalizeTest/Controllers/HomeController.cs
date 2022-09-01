@@ -37,22 +37,11 @@ namespace WebApplicationLocalizeTest.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult SelectLanguageEnglish()
+        public IActionResult SelectLanguage(string language)
         {
             Response.Cookies.Append(
                CookieRequestCultureProvider.DefaultCookieName,
-               CookieRequestCultureProvider.MakeCookieValue(new RequestCulture("en-US")),
-               new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
-           );
-
-            return LocalRedirect("~/Home/Index");
-        }
-
-        public IActionResult SelectLanguageChinese()
-        {
-            Response.Cookies.Append(
-               CookieRequestCultureProvider.DefaultCookieName,
-               CookieRequestCultureProvider.MakeCookieValue(new RequestCulture("zh-CN")),
+               CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(language)),
                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
            );
 
