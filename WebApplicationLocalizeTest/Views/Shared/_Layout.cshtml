@@ -47,7 +47,33 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/banana-i18n.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="/scripts/layui/layui.js" merge="true"></script>
+    <script>
+        layui.config({
+            base: '/scripts/layui/lay/modules/', //你存放新模块的目录，注意，不是layui的模块目录
+            path: '/scripts/layui/css/'
+        }).use('index'); //加载入口
+    </script>
     @RenderSection("Scripts", required: false)
+    @RenderSection("HeadSection", false)
 </body>
 </html>
-      
+
+<script>
+    layui.use(['jquery', 'i18np'], function () {
+        var i18np = layui.i18np;
+
+        var language = localStorage.getItem('language');
+        window.getprop = function (lan) {
+            return i18np.prop(lan);
+        }
+        window.changeLanguage = function (lan) {
+            console.log('will change language to ', lan);
+            i18np.changeLanguage(lan);
+        }
+        i18np.load(language);
+
+        console.log('Test i18n:', getprop('haha'))
+    });
+</script>
+
